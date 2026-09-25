@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cilla | Builder</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family: -apple-system, sans-serif; }
+  body { background:#f8f8f8; color:#222; line-height:1.6; transition:0.3s; padding:20px; }
+  body.dark { background:#121212; color:#eee; }
+  body.dark a { color:#90cdf4; }
+  header { display:flex; justify-content:space-between; align-items:center; max-width:800px; margin:20px auto; }
+  #themeBtn { padding:8px 15px; border:1px solid #ccc; border-radius:20px; cursor:pointer; background:white; }
+  body.dark #themeBtn { background:#333; color:white; border-color:#555; }
+  main { max-width:800px; margin:40px auto; }
+  h1 { font-size:2.5rem; min-height:60px; }
+  p { margin:15px 0; font-size:1.1rem; }
+  .links a { margin-right:15px; text-decoration:none; color:#0077ff; font-weight:600; }
+  footer { text-align:center; margin-top:60px; opacity:0.6; }
+</style>
+</head>
+<body>
+
+<header>
+  <strong>cilla.dev</strong>
+  <button id="themeBtn">🌙 Dark Mode</button>
+</header>
+
+<main>
+  <h1 id="typed"></h1>
+  <p>I'm a builder learning in public. Documenting my journey from 0 to 1.</p>
+  <p>Currently focused on: HTML, CSS, JavaScript. Now building: My personal site + small experiments.
+Goal for next 30 days: Ship 5 tiny projects.</p>
+  <div class="links">
+    <a href="https://github.com/shyrudegal" target="_blank">GitHub</a>
+    <a href="https://threads.com/@omoremime9" target="_blank">Threads</a>
+    <a href="https://instagram.com/omoremime9" target="_blank">Instagram</a>
+    <a href="#">Projects coming soon</a>
+  </div>
+</main>
+
+<footer>© <span id="year"></span> CILLA. Built in public.</footer>
+
+<script>
+// 1. Dark Mode
+const btn = document.getElementById('themeBtn');
+btn.onclick = () => {
+  document.body.classList.toggle('dark');
+  btn.textContent = document.body.classList.contains('dark') ? '☀️ Light Mode' : '🌙 Dark Mode';
+  localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+}
+
+if(localStorage.getItem('theme') === 'dark'){ document.body.classList.add('dark'); btn.textContent='☀️ Light Mode'; }
+
+
+const text = "Hi, I'm Cilla 👋";
+let i = 0;
+const h1 = document.getElementById('typed');
+function type() {
+  if(i < text.length){
+    h1.innerHTML += text.charAt(i);
+    i++;
+    setTimeout(type, 90);
+  }
+}
+type();
+
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
